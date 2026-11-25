@@ -1853,24 +1853,40 @@ local function CreateScriptCard(scriptInfo,index)
     end
 
     local Execute=New("TextButton",{
-        Name="ExecuteButton",Size=UDim2.fromOffset(72,30),
-        Position=UDim2.new(1,-158,0,29),BackgroundColor3=Matte.Normal,
-        Text="EXECUTE",TextColor3=C.White,TextSize=8,
+        Name="ExecuteButton",Size=UDim2.fromOffset(116,34),
+        Position=UDim2.new(1,-130,0,27),BackgroundColor3=Color3.fromRGB(232,232,232),
+        Text="▶  EXECUTE",TextColor3=Color3.fromRGB(12,12,12),TextSize=9,
         Font=Enum.Font.GothamBlack,AutoButtonColor=false,
         BorderSizePixel=0,ZIndex=9
     },Card)
-    Round(Execute,9)
-    ButtonAnimation(Execute,Matte.Normal,Matte.Hover)
-
-    local Copy=New("TextButton",{
-        Name="CopyButton",Size=UDim2.fromOffset(68,30),
-        Position=UDim2.new(1,-80,0,29),BackgroundColor3=Matte.Normal,
-        Text="COPY",TextColor3=C.White,TextSize=8,
-        Font=Enum.Font.GothamBlack,AutoButtonColor=false,
-        BorderSizePixel=0,ZIndex=9
-    },Card)
-    Round(Copy,9)
-    ButtonAnimation(Copy,Matte.Normal,Matte.Hover)
+    Round(Execute,10)
+    local ExecuteStroke=Instance.new("UIStroke")
+    ExecuteStroke.Color=Color3.fromRGB(255,255,255)
+    ExecuteStroke.Transparency=0.18
+    ExecuteStroke.Thickness=1
+    ExecuteStroke.Parent=Execute
+    local ExecuteGradient=Instance.new("UIGradient")
+    ExecuteGradient.Color=ColorSequence.new({
+        ColorSequenceKeypoint.new(0,Color3.fromRGB(245,245,245)),
+        ColorSequenceKeypoint.new(0.5,Color3.fromRGB(205,205,205)),
+        ColorSequenceKeypoint.new(1,Color3.fromRGB(255,255,255))
+    })
+    ExecuteGradient.Rotation=0
+    ExecuteGradient.Parent=Execute
+    Execute.MouseEnter:Connect(function()
+        Tween(Execute,{BackgroundColor3=Color3.fromRGB(255,255,255)},0.15)
+        Tween(ExecuteStroke,{Transparency=0},0.15)
+    end)
+    Execute.MouseLeave:Connect(function()
+        Tween(Execute,{BackgroundColor3=Color3.fromRGB(232,232,232)},0.15)
+        Tween(ExecuteStroke,{Transparency=0.18},0.15)
+    end)
+    Execute.MouseButton1Down:Connect(function()
+        Tween(Execute,{BackgroundColor3=Color3.fromRGB(175,175,175)},0.08)
+    end)
+    Execute.MouseButton1Up:Connect(function()
+        Tween(Execute,{BackgroundColor3=Color3.fromRGB(255,255,255)},0.08)
+    end)
 
     local Executing=false
     Execute.MouseButton1Click:Connect(function()
@@ -1900,27 +1916,6 @@ local function CreateScriptCard(scriptInfo,index)
                 Tween(Execute,{BackgroundColor3=Matte.Normal},0.2)
             end
             Executing=false
-        end)
-    end)
-
-    Copy.MouseButton1Click:Connect(function()
-        local success,err=pcall(function()
-            if not setclipboard then error("Clipboard is unsupported") end
-            setclipboard(GetLoadstring(scriptInfo.URL))
-        end)
-        if success then
-            Copy.Text="COPIED"
-            Copy.TextColor3=C.Green
-        else
-            Copy.Text="FAILED"
-            Copy.TextColor3=C.Red
-            warn("[PYROVEX LOADER] COPY ERROR: "..tostring(err))
-        end
-        task.delay(1.5,function()
-            if Copy and Copy.Parent then
-                Copy.Text="COPY"
-                Copy.TextColor3=C.White
-            end
         end)
     end)
 
