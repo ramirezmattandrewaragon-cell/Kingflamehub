@@ -5,4 +5,4 @@ PYROVEX HUB
 —the fact is even you see the pyrovex hub no problem,it has many problems that every day solving it just to handle our community stable because our dream is to be one of the famous script hub producer like speedhub,beasthub and more scripts that are famous.
 —If you are a famous or even small and starting script producer you can get a partnership with pyrovex hub community if you want we will always accept you depends on what your community purpose..
 WARNING⚠
-—This ScrThis are Protected by kingflame/Pyrovex hub once you get caught stealing or modifying our scripts it has a consequences!
+—This Script are Protected by kingflame/Pyrovex hub once you get caught stealing or modifying our scripts it has a consequences!
